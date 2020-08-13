@@ -17,7 +17,7 @@ import { MgidWidget } from 'react-mgid-widget'
 class Component extends React.Component {
 
   render() {
-    return <MgidWidget id='M207275ScriptRootC353317' src='https://jsc.mgid.com/b/a/barada.com.353317.js'/>
+    return <MgidWidget id='M284163ScriptRootC983763' src='https://jsc.mgid.com/s/a/samplepage.mgid.com.983763.js'/>
   }
 }
 ```
