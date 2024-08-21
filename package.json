@@ -1,6 +1,6 @@
 {
   "name": "react-mgid-widget",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Embed your MGID widget inside a react app",
   "main": "build/index.js",
   "peerDependencies": {
