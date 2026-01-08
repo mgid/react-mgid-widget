@@ -1,24 +1,27 @@
 /* eslint-disable react/no-danger */
 
-import React from "react";
-import { Helmet } from "react-helmet";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
-const MgidWidget = ({ id, src }) => (
-  <div>
-    <div data-type="_mgwidget" data-widget-id={id} />
-    <script
-      dangerouslySetInnerHTML={{
-        __html:
-          '(function(w,q){w[q]=w[q]||[];w[q].push(["_mgc.load"]);})(window,"_mgq");',
-      }}
-    />
+const MgidWidget = ({ id, src }) => {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.async = true;
+    document.head.appendChild(script);
 
-    <Helmet>
-      <script src={src} async />
-    </Helmet>
-  </div>
-);
+    window._mgq = window._mgq || [];
+    window._mgq.push(["_mgc.load"]);
+
+    return () => {
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, [src]);
+
+  return <div data-type="_mgwidget" data-widget-id={id} />;
+};
 
 MgidWidget.propTypes = {
   id: PropTypes.string.isRequired,
