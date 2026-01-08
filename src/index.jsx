@@ -1,17 +1,16 @@
 /* eslint-disable react/no-danger */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 const MgidWidget = ({ id, src }) => {
+  const containerRef = useRef(null);
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src = src;
     script.async = true;
     document.head.appendChild(script);
-
-    window._mgq = window._mgq || [];
-    window._mgq.push(["_mgc.load"]);
 
     return () => {
       if (script.parentNode) {
@@ -20,7 +19,14 @@ const MgidWidget = ({ id, src }) => {
     };
   }, [src]);
 
-  return <div data-type="_mgwidget" data-widget-id={id} />;
+  useEffect(() => {
+    if (containerRef.current) {
+      window._mgq = window._mgq || [];
+      window._mgq.push(["_mgc.load"]);
+    }
+  }, []);
+
+  return <div ref={containerRef} data-type="_mgwidget" data-widget-id={id} />;
 };
 
 MgidWidget.propTypes = {
